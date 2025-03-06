@@ -11,7 +11,7 @@ function runSandboxFunctions ()
     setSearchbarPlaceholder ();
     window.setTimeout (loadGetHelpButton, 2000);
     //    This is just for visual confirmation of which version of the script is loading.
-    console.log ("SandboxScripts.js version 2025.03.04");
+    console.log ("biola-scripts.js sb version 2025.03.06");
 }
 
 function runProductionFunctions ()
@@ -20,7 +20,7 @@ function runProductionFunctions ()
     loadFontAwesome6 ();
     setSearchbarPlaceholder ();
     //    This is just for visual confirmation of which version of the script is loading.
-    console.log ("ProductionxScripts.js version 2025.02.24");
+    console.log ("biola-scripts.js prod version 2025.03.06");
 }
 
 /**
@@ -29,7 +29,7 @@ function runProductionFunctions ()
 function appendStylesheet (fileName)
 {
   //  Define where the stylesheet is stored
-  var stylesheetUrl = `https://jasonbiola.github.io/TDX/${fileName}`;
+  var stylesheetUrl = `https://biola-it.github.io/TDX/${fileName}`;
   
   //  Define a new "link" element to be appended to the document head
   var stylesheetLink = document.createElement('link');
