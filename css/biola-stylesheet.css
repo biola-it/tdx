@@ -1,0 +1,438 @@
+/** Stylesheet version 24.8.13 **/
+
+/* Define CSS variables for global styles */
+:root {
+  /* color definitions */
+  --biola-dark-blue: #2268ab;
+  --biola-light-blue: #d9edf7;
+  --biola-grey: #666666;
+  --biola-gray: var(--biola-grey);  /* Because some people like to spell grey the wrong way 🙄 */
+  --callout-halt-dark: #990000ff;
+  --callout-halt-light: #ffccccff;
+  --callout-info-dark: #2268ab;
+  --callout-info-light: #d9edf7;
+  --callout-warning-dark: #997f00ff;
+  --callout-warning-light: #fff2b3ff;
+  --info-border-color: #bce8f1;
+
+  /* header definitions */
+  --h2-bg: var(--biola-light-blue);
+  --h2-border-radius: var(--default-border-radius);
+  --h2-fg: black;
+  --h2-margin: 0;
+  --h2-padding: .25em;
+  --h3-font-weight: 500;
+
+  --cp-link-color: blue;
+  --cp-link-decor: underline;
+  --cp-link-border-bottom: none !important;
+  --default-border-radius: 6px;
+  --list-link-color: var(--biola-dark-blue);
+  --toggle-icon-size: 24px;
+}
+
+/** ⇓ Accordions ⇓ **/
+.accordion {
+  background-color: var(--info-border-color);
+  border: 1px solid var(--info-border-color);
+  border-radius: var(--default-border-radius);
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+  margin: 1em 0;
+}
+.accordion.theme-dark_blue {
+  background-color: var(--biola-dark-blue);
+  border: 1px solid var(--biola-dark-blue);
+}
+
+.accordion-target {
+  background-color: white;
+  border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
+  margin: 0;
+  padding: 6px;
+}
+.accordion-target>*:first-child, accordion-trigger>*:first-child {
+  margin-top: 0;
+}
+.accordion-target>*:last-child, accordion-trigger>*:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-trigger {
+  align-items: center;
+  background-color: var(--biola-light-blue);
+  border-radius: var(--default-border-radius);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 6px;
+  width: inherit;
+}
+.theme-dark_blue .accordion-trigger {
+  background-color: var(--biola-dark-blue);
+  color: white;
+}
+.accordion-trigger::after {
+  color: var(--biola-dark-blue);
+  content: "\f150";
+  font-family: "Font Awesome 6 Pro";
+  font-size: var(--toggle-icon-size);
+  font-weight: 900;
+  float: right;
+  height: var(--toggle-icon-size);
+  text-align: center;
+  width: var(--toggle-icon-size);
+}
+.accordion:has(.accordion-target.in)>.accordion-trigger::after {
+        content: "\f0d8";
+}
+.theme-dark_blue .accordion-trigger::after {
+  color: white;
+}
+
+/** ⇑ Accordions ⇑ **/
+
+/* For some reason, Foundation adds weird negative margins to their [.grid-margin-x] divs, even when they should be centered. */
+.align-center>.grid-margin-x {
+  margin-left: 0;
+}
+
+.biola-module h2 {
+  background-color: var(--h2-bg);
+  border-radius: var(--h2-border-radius) var(--h2-border-radius) 0 0;
+  color: var(--h2-fg);
+  margin: var(--h2-margin);
+  padding: var(--h2-padding);
+}
+
+.biola-module h3 {
+  font-weight: var(--h3-font-weight);
+}
+
+.buwidget-container {
+}
+
+/** ⇓ Callouts ⇓ **/
+.callout {
+  align-items: stretch;
+  display: flex;
+  flex-flow: row wrap;
+  /*gap: 10px;*/
+}
+.callout::before {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  float: left;
+  font-family: 'Font Awesome 6 Pro';
+  font-size: 3em;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 50px;
+  width: 50px;
+  padding: 0 10px;
+  -webkit-font-smoothing: antialiased;
+}
+.callout > * {
+  align-self: center;
+  height: 100%;
+  margin: 0 10px;
+  max-width: calc(100% - 70px);
+}
+
+.callout.halt {
+  background-color: var(--callout-halt-light);
+  border: 1px solid var(--callout-halt-dark);
+}
+.callout.info {
+  background-color: var(--callout-info-light);
+  border: 1px solid var(--callout-info-dark);
+  }
+.callout.warning {
+  background-color: var(--callout-warning-light);
+  border: 1px solid var(--callout-warning-dark); 
+}
+
+.callout.halt::before {
+  background-color: var(--callout-halt-dark);
+  content: '\e204';
+}
+  .callout.info::before {
+  background-color: var(--callout-info-dark);
+  content: '\f05a';
+  }
+.callout.warning::before {
+  background-color: var(--callout-warning-dark); 
+  content: '\f321';
+}
+/** ⇑ Callouts ⇑ **/
+
+/* This makes the category button icons  smaller */
+.category-box .category-icon {
+  font-size: 3em;
+  margin-top: 16px;
+}
+
+/** ⇓ Reset Client Portal link style to "bright blue, and underlined" ⇓ **/
+#ctl00_ctl00_cpContent_cpContent_divBody a {
+  color: var(--cp-link-color);
+  text-decoration: var(--cp-link-decor);
+  border-bottom: var(--cp-link-border-bottom);
+}
+/** ⇑ Reset Client Portal link style to "bright blue, and underlined" ⇑ **/
+/** Restyle the link to the ticket from a workflow step, so that clients can jump easily from Approval step pages to the ticket, to review what they are approving **/
+  #ctl00_ctl00_cpContent_cpContent_divTicketName a { /* Make the link look like a button, so it will stand out on the page */
+    align-items: center;
+    background-color: #bf3935;
+    border-radius: 5px;
+    color: white;
+    content: "This is a test";
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+    width: 300px;
+  }
+  #ctl00_ctl00_cpContent_cpContent_divTicketName a::before { /* Add a FontAwesome "information" icon to the link */
+    content: "\f05a";
+    font-family: "Font Awesome 6 Pro";
+    font-size: 20px;
+    font-weight: 900;
+  }
+/** end ticket link restyle **/
+
+/* hides any TDx modules that contain a ".hide-module-container" element */
+.desktop-module:has(.hide-module-container)
+{
+  display: none;
+  margin: 0;
+}
+
+/* This makes the action button text not bold */
+.DetailAction {
+  font-weight: normal;
+}
+
+/* This needs to be here becauase it doesn't work just using [.DetailAction], don't change it back Adam */
+a.DetailAction,
+button.DetailAction,
+div.DetailAction {
+  font-size: 18px;
+}
+
+/* Override Foundation's odd decision to decrease the font-size of labels */
+label {
+  font-size: 1em;
+}
+
+.landing-page-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.landing-page-header>div {
+  margin: 0 1em;
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+.landing-page-header-container {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 2em 0;
+}
+
+.landing-page-header-text-container>h1,
+.landing-page-header-text-container>h2 {
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+}
+
+.landing-page-header-text-container>h1 {
+  font-family: arial;
+  font-size: 50px;
+  font-weight: 100;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.landing-page-header-text-container>h2 {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 8px;
+}
+
+.landing-page-header-text-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.landing-page-subheader {
+  border-top: 1px solid #2268ab;
+  display: flex;
+  font-size: 21px;
+  font-weight: 500;
+  justify-content: center;
+  letter-spacing: 3px;
+  padding-top: 1em;
+  text-align: center;
+}
+
+.large-2-column {
+  /* This is further defined in the Media Queries section at the bottom of the stylesheet */
+  display: grid;
+  row-gap: 2em;
+}
+
+.link-list-container {
+  /*border: 1px solid black;*/
+  padding: .5em;
+}
+
+.link-list-container>* {
+  margin: 0;
+}
+
+.link-list-container a {
+  color: var(--list-link-color);
+}
+
+.link-list-container > ul {
+  list-style-type: disc;
+  padding-left: 1.75em;
+}
+
+.no-border {
+  border: none;
+}
+
+/* prevent "flash of unformatted content", by hiding elements until Foundation & Bootstrap load */
+.no-fouc {
+  display: none;
+}
+
+.mini-callout {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content:left;
+}
+
+/** ⇓ the "header" for .minicallout ⇓ **/
+.mc-header {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.mc-header::before, .mc-header::after {
+  align-items: center;
+  display: grid;
+  color: red;
+  font-weight: 900;
+  height: 1.5em;
+  margin-right: .5em;
+}
+.mc-header::before {
+  content: "\f06a";
+  font-family: "Font Awesome 6 Pro";
+}
+.mc-header::after {
+  content: "Note:";
+  font-family: Arial, Helvetica, sans-serif;
+}
+/** ⇑ the "header" for .minicallout ⇑ **/
+
+/** ⇓ the "body" for .minicallout ⇓ **/
+.body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: .3em;
+}
+/** ⇑ the "body" for .minicallout ⇑ **/
+
+.quickjump {
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+  width: 110px;
+}
+.quickjump>*{
+  margin: .5em 0;
+}
+.quickjump a {
+  border-bottom: none;
+}
+
+.quickjump-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+div.rss-container {
+  padding: 15px;
+  font-family: Arial, sans-serif;
+}
+
+div.rss-headline {
+  font-family: Helvetica Neue;
+  color: #2b2b2b;
+  font-size: 1.2em;
+  font-weight: 400;
+  line-height: 1.42857143;
+}
+
+/** begin Service Portfolio Entry styling **/
+  .spe-attribute-table ul, .spe-attribute-table ol {
+    margin-bottom: 0;
+  }
+  .spe-attribute-table, .spe-table {
+    border: 1px solid var(--biola-dark-blue);
+    border-collapse: separate;
+  }
+  .spe-row-value, .spe-row-header {
+      border-bottom: 1px solid var(--biola-dark-blue);
+      min-width: 17em;
+      padding: 5px 10px;
+  }
+  .spe-row-header {
+      background-color: var(--biola-light-blue);
+      text-align: right;
+      vertical-align: top;
+      width: 17em;
+  }
+/** end Service Portfolio styling **/
+#32772 {
+  margin: 2em;
+}
+
+
+/** Media queries for responsive elements **/
+
+@media only screen and (max-width: 991px) {
+
+  /* On non-large screens, make .large-2-column containers single-column.*/
+  .large-2-column {
+      grid-template-columns: 100%;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  /* Unhides .no-fouc elements once the window has loaded */
+  .no-fouc {
+      display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .large-2-column {
+      column-gap: 2em;
+      grid-template-columns: calc(50% - 1em) calc(50% - 1em);
+  }
+}
