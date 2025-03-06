@@ -183,6 +183,7 @@
   border-bottom: var(--cp-link-border-bottom);
 }
 /** ⇑ Reset Client Portal link style to "bright blue, and underlined" ⇑ **/
+
 /** Restyle the link to the ticket from a workflow step, so that clients can jump easily from Approval step pages to the ticket, to review what they are approving **/
   #ctl00_ctl00_cpContent_cpContent_divTicketName a { /* Make the link look like a button, so it will stand out on the page */
     align-items: center;
@@ -203,6 +204,35 @@
     font-weight: 900;
   }
 /** end ticket link restyle **/
+
+/** ⇓ Get Help button(s) styling ⇓ **/
+
+/** ⇓ Overwrite TDX's .navbar-header styling ⇓ **/
+/** Overwrite the "float: left" that is set across the board for TDX's .navbar-header div, so that the get help buttons auto-align to the right in wide-screen **/
+@media (min-width: 768px) {
+  .navbar-header {
+    float: right;
+  }
+}
+/**
+.navbar-header {
+  min-width: 375px;
+}
+/** ⇑ Overwrite TDX's .navbar-header styling ⇑ **/
+
+.header-btn-container {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  float: right;
+  flex-direction: row;
+  height: 50px;
+  justify-content: flex-end;
+  padding: 10px;
+}
+/** ⇑ Get Help button(s) styling ⇑ **/
+
 
 /* hides any TDx modules that contain a ".hide-module-container" element */
 .desktop-module:has(.hide-module-container)
@@ -359,7 +389,8 @@ label {
   display: flex;
   flex-flow: column;
   text-align: center;
-  width: 110px;
+  width: 120px;
+  margin: 5px 20px;
 }
 .quickjump>*{
   margin: .5em 0;
@@ -371,7 +402,9 @@ label {
 .quickjump-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
   width: 100%;
 }
 
