@@ -111,6 +111,11 @@
   font-weight: var(--h3-font-weight);
 }
 
+/** Set the minimum width of the body, to prevent everything looking ridiculous **/
+body {
+  min-width: 380px;
+}
+
 .buwidget-container {
 }
 
@@ -214,10 +219,11 @@
     float: right;
   }
 }
-
-.navbar-header {
-  min-width: 375px;
+/** Remove the width setting on the "IT Client Portal" link, so that everything will fit in small screen **/
+.truncate-be {
+  width: auto;
 }
+
 /** ⇑ Overwrite TDX's .navbar-header styling ⇑ **/
 
 .header-btn-container {
