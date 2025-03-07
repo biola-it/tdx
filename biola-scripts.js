@@ -45,6 +45,40 @@ function appendStylesheet (fileName)
 }
 
 /**
+* returns the HTML for the public/non-authenticated Get Help form
+**/
+function buildPublicGHB ()
+{
+  var buttonLink = `https://services.biola.edu/TDClient/75/Portal/Requests/TicketRequests/NewForm?ID=GyNVwIAQfFw_&RequestorType=ServiceOffering`;
+  var buttonText = `Get help signing in`;
+  var button = `<button class="btn btn-light">
+    <a href="${buttonLink}">
+    	${buttonText}
+    </a>
+  </button>`;
+
+  return button;
+}
+
+/**
+* returns the HTML text for the authenticated Get Help form
+**/
+function buildSsoGHB ()
+{
+//    Get the current address for a backlink reference
+  var backlinkUrl = encodeURI (window.location.href);
+  var buttonLink = `https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT1BQTZoWVlkMkdLQWVuRStpZ0pMSWhQSXcvQXFLZktPMERIRlhoa0s1NmlpcmoyZlFxR0dEM1FTK1B2Z0VBMVFJdVpGdUlzQk5MUEROSXk1ZUx1SWFVQi9vdVBBK0ZXbVFjbzgxSmhSZ3JPUWxVQ2d3c28ycEI0TDRMdkI2KzRZUQ`;
+  var buttonText = `Report a problem`;
+  var button = `<button class="btn btn-light">
+    <a href="${buttonLink}&backlink=${backlinkUrl}">
+    	${buttonText}
+    </a>
+  </button>`;
+
+  return button;
+}
+
+/**
 * Searches the #content div for any .site-search containers,
 * and restyles them to make them "more shiny"
 **/
@@ -97,25 +131,37 @@ function linkAccordions ()
     }
 }
 
+
 /**
-* This function injects a Get Help button into the top menu bar in TDX Client Portal
+* Injects the Get Help button into the top menu bar in TDX Client Portal
 **/
 function loadGetHelpButton ()
 {
-    //    Get the current address for a backlink reference
-    var backlinkUrl = encodeURI (window.location.href);
     //    Create a new div to contain the button
     var containerDiv = document.createElement ("div");
-    containerDiv.id="bu-get-help";
+    //  Set the container's class
+    containerDiv.class = `header-btn-container`;
+    //  Set the container's ID
+    containerDiv.id = "bu-get-help";
+    //  Set the container's style explicitly (can be replaced soon with CSS)
     containerDiv.style = `align-content: center; align-items: center; display: flex; flex-flow: row wrap; float: right; flex-direction: row; height: 50px; justify-content: flex-end; padding: 10px;`;
+
+    //  Depending on screen context, create a link to either the public or the SSO form, or an error
+    var button = $(`#btnUserProfileMenu`).length > 0 ?
+        //  If a #btnUserProfileMenu div exists, then the user is signed in: build the SSO button
+        buildSsoGHB () :
+        $(`div [title="Sign In"]`).length > 0 ?
+        //  If a div with the title "Sign In" exists, then the user is not signed in: build the public button
+        buildPublicGHB () :
+        //  If neither of the above is true, then something went wrong.
+        "<p>SOMETHING WENT WRONG</p>";
+
     //    inside the div, create a "button" containing a link to the form, including the backlink
-    containerDiv.innerHTML = `
-    <button class="btn btn-light"><a href="https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT1BQTZoWVlkMkdLQWVuRStpZ0pMSWhQSXcvQXFLZktPMERIRlhoa0s1NmlpcmoyZlFxR0dEM1FTK1B2Z0VBMVFJdVpGdUlzQk5MUEROSXk1ZUx1SWFVQi9vdVBBK0ZXbVFjbzgxSmhSZ3JPUWxVQ2d3c28ycEI0TDRMdkI2KzRZUQ&backlink=${backlinkUrl}">
-    	Report a problem
-    </a></button>`;
+    containerDiv.innerHTML = button;
     //    prepend the container div into the #ct100_mainNav div
     $(`#td-navbar-collapse`).prepend (containerDiv);
 }
+
 
 function loadFontAwesome6 ()
 {
