@@ -14,4 +14,4 @@ To add these files to TeamDynamix, use the GitHub Pages urls for the files. Thes
 ### Search Bar styling
 A request was made to make the in-page TDx search bar "more shiny". As a result, the `fixSearchBars()` function was added to the javascript file, which does things like make the search bars full-width, adds a highlight/frame around them, etc.
 ### Get Help buttons
-We were asked to add a button into the top nav bar that would link to the Get Help form(s). This is handled by the `loadGetHelpButton()` function, which relies on the `buildPublicButton()` and `buildSsoButton()` functions.
+We were asked to add a button into the top nav bar that would link to the Get Help form(s). This is handled by the `loadGetHelpButton()` function, which relies on the `buildPublicGHB()` and `buildSsoGHB()` functions.
