@@ -158,8 +158,8 @@ function loadGetHelpButton ()
 
     //    inside the div, create a "button" containing a link to the form, including the backlink
     containerDiv.innerHTML = button;
-    //    prepend the container div into the #ct100_mainNav div
-    $(`#td-navbar-collapse`).prepend (containerDiv);
+    //    prepend the container div into the .navbar-header div
+    $(`#navContainer>div.navbar-header`).append (containerDiv);
 }
 
 
