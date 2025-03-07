@@ -29,7 +29,7 @@ function runProductionFunctions ()
 function appendStylesheet (fileName)
 {
   //  Define where the stylesheet is stored
-  var stylesheetUrl = `https://biola-it.github.io/TDX/${fileName}`;
+  var stylesheetUrl = `https://biola-it.github.io/tdx/${fileName}`;
   
   //  Define a new "link" element to be appended to the document head
   var stylesheetLink = document.createElement('link');
