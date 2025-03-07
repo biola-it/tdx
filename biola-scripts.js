@@ -137,6 +137,9 @@ function linkAccordions ()
 **/
 function loadGetHelpButton ()
 {
+    var signedInTestElt = `.settings-button`;
+    var notSignedInTestEld = `div [title="Sign In"]`;
+    
     //    Create a new div to contain the button
     var containerDiv = document.createElement ("div");
     //  Set the container's class
@@ -147,14 +150,15 @@ function loadGetHelpButton ()
     containerDiv.style = `align-content: center; align-items: center; display: flex; flex-flow: row wrap; float: right; flex-direction: row; height: 50px; justify-content: flex-end; padding: 10px;`;
 
     //  Depending on screen context, create a link to either the public or the SSO form, or an error
-    var button = $(`#btnUserProfileMenu`).length > 0 ?
-        //  If a #btnUserProfileMenu div exists, then the user is signed in: build the SSO button
-        buildSsoGHB () :
-        $(`div [title="Sign In"]`).length > 0 ?
-        //  If a div with the title "Sign In" exists, then the user is not signed in: build the public button
-        buildPublicGHB () :
-        //  If neither of the above is true, then something went wrong.
-        "<p>SOMETHING WENT WRONG</p>";
+    var button =
+        $(signedInTestElt).length > 0 ?
+            //  If a #btnUserProfileMenu div exists, then the user is signed in: build the SSO button
+            buildSsoGHB () :
+        $(notSignedInTestEld).length > 0 ?
+            //  If a div with the title "Sign In" exists, then the user is not signed in: build the public button
+            buildPublicGHB () :
+            //  If neither of the above is true, then something went wrong.
+            "<p>SOMETHING WENT WRONG</p>";
 
     //    inside the div, create a "button" containing a link to the form, including the backlink
     containerDiv.innerHTML = button;
