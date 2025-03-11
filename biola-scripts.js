@@ -68,7 +68,7 @@ function buildSsoGHB ()
 //    Get the current address for a backlink reference
   var backlinkUrl = encodeURI (window.location.href);
   var buttonLink = `https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT1BQTZoWVlkMkdLQWVuRStpZ0pMSWhQSXcvQXFLZktPMERIRlhoa0s1NmlpcmoyZlFxR0dEM1FTK1B2Z0VBMVFJdVpGdUlzQk5MUEROSXk1ZUx1SWFVQi9vdVBBK0ZXbVFjbzgxSmhSZ3JPUWxVQ2d3c28ycEI0TDRMdkI2KzRZUQ`;
-  var buttonText = `Report a problem`;
+  var buttonText = `Request help`;
   var button = `<button class="btn btn-light">
     <a href="${buttonLink}&backlink=${backlinkUrl}">
     	${buttonText}
