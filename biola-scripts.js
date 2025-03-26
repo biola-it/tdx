@@ -51,7 +51,7 @@ function appendStylesheet (fileName)
 function buildPublicGHB ()
 {
   var buttonLink = `https://services.biola.edu/TDClient/75/Portal/Requests/TicketRequests/NewForm?ID=GyNVwIAQfFw_&RequestorType=ServiceOffering`;
-  var buttonText = `Sign in help`;
+  var buttonText = `Get help signing in`;
   var button = `<button class="btn btn-light">
     <a href="${buttonLink}">
     	${buttonText}
