@@ -1,3 +1,6 @@
+const publicHelpFormLink = `https://services.biola.edu/TDClient/75/Portal/Requests/TicketRequests/NewForm?ID=GyNVwIAQfFw_&RequestorType=ServiceOffering`;
+const ssoHelpFormLink = `https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT1BQTZoWVlkMkdLQWVuRStpZ0pMSWhQSXcvQXFLZktPMERIRlhoa0s1NmlpcmoyZlFxR0dEM1FTK1B2Z0VBMVFJdVpGdUlzQk5MUEROSXk1ZUx1SWFVQi9vdVBBK0ZXbVFjbzgxSmhSZ3JPUWxVQ2d3c28ycEI0TDRMdkI2KzRZUQ`;
+
 function runDelayedFunctions ()
 {
     fixSearchBars ();
@@ -50,7 +53,7 @@ function appendStylesheet (fileName)
 **/
 function buildPublicGHB ()
 {
-  var buttonLink = `https://services.biola.edu/TDClient/75/Portal/Requests/TicketRequests/NewForm?ID=GyNVwIAQfFw_&RequestorType=ServiceOffering`;
+  var buttonLink = publicHelpFormLink;
   var buttonText = `Get help signing in`;
   var button = `<button class="btn btn-light">
     <a href="${buttonLink}">
@@ -68,7 +71,8 @@ function buildSsoGHB ()
 {
 //    Get the current address for a backlink reference
   var backlinkUrl = encodeURI (window.location.href);
-  var buttonLink = `https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT1BQTZoWVlkMkdLQWVuRStpZ0pMSWhQSXcvQXFLZktPMERIRlhoa0s1NmlpcmoyZlFxR0dEM1FTK1B2Z0VBMVFJdVpGdUlzQk5MUEROSXk1ZUx1SWFVQi9vdVBBK0ZXbVFjbzgxSmhSZ3JPUWxVQ2d3c28ycEI0TDRMdkI2KzRZUQ`;
+  var buttonLink = ssoHelpFormLink;
+    
   var buttonText = `Request help`;
   var button = `<button class="btn btn-light">
     <a href="${buttonLink}&backlink=${backlinkUrl}">
@@ -139,7 +143,7 @@ function linkAccordions ()
 function loadGetHelpButton ()
 {
     var signedInTestElt = `.settings-button`;
-    var notSignedInTestEld = `div [title="Sign In"]`;
+    var notSignedInTestElt = `div [title="Sign In"]`;
     
     //    Create a new div to contain the button
     var containerDiv = document.createElement ("div");
@@ -151,15 +155,24 @@ function loadGetHelpButton ()
     containerDiv.style = `align-content: center; align-items: center; display: flex; flex-flow: row wrap; float: right; flex-direction: row; height: 50px; justify-content: flex-end; padding: 10px;`;
 
     //  Depending on screen context, create a link to either the public or the SSO form, or an error
-    var button =
-        $(signedInTestElt).length > 0 ?
-            //  If a #btnUserProfileMenu div exists, then the user is signed in: build the SSO button
-            buildSsoGHB () :
-        $(notSignedInTestEld).length > 0 ?
-            //  If a div with the title "Sign In" exists, then the user is not signed in: build the public button
-            buildPublicGHB () :
-            //  If neither of the above is true, then something went wrong.
-            "<p>SOMETHING WENT WRONG</p>";
+    var button;
+    //  If a #btnUserProfileMenu div exists, then the user is signed in: build the SSO button
+    if ( $(signedInTestElt).length > 0 )
+    {
+        button = buildSsoGHB ();
+        $(`.req-help-button`).attr("href", ssoHelpFormLink);
+    }
+    //  If a div with the title "Sign In" exists, then the user is not signed in: build the public button
+    elseif ( $(notSignedInTestElt).length > 0 )
+    {
+        button = buildPublicGHB ();
+        $(`.req-help-button`).attr("href", publicHelpFormLink);
+    }
+    //  If neither of the above is true, then something went wrong.
+    else
+    {
+        button = "<p>SOMETHING WENT WRONG</p>";
+    }
 
     //    inside the div, create a "button" containing a link to the form, including the backlink
     containerDiv.innerHTML = button;
