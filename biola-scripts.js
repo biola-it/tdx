@@ -163,7 +163,7 @@ function loadGetHelpButton ()
         $(`.req-help-button`).attr("href", ssoHelpFormLink);
     }
     //  If a div with the title "Sign In" exists, then the user is not signed in: build the public button
-    elseif ( $(notSignedInTestElt).length > 0 )
+    else if ( $(notSignedInTestElt).length > 0 )
     {
         button = buildPublicGHB ();
         $(`.req-help-button`).attr("href", publicHelpFormLink);
