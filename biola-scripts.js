@@ -1,5 +1,5 @@
 var publicHelpFormLink = `https://services.biola.edu/TDClient/75/Portal/Requests/TicketRequests/NewForm?ID=GyNVwIAQfFw_&RequestorType=ServiceOffering`;
-var ssoHelpFormLink = `https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT1BQTZoWVlkMkdLQWVuRStpZ0pMSWhQSXcvQXFLZktPMERIRlhoa0s1NmlpcmoyZlFxR0dEM1FTK1B2Z0VBMVFJdVpGdUlzQk5MUEROSXk1ZUx1SWFVQi9vdVBBK0ZXbVFjbzgxSmhSZ3JPUWxVQ2d3c28ycEI0TDRMdkI2KzRZUQ`;
+var ssoHelpFormLink = `https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT1BQTZoWVlkMkdLQWVuRStpZ0pMSWhQSXcvQXFLZktPMERIRlhoa0s1NmlpcmoyZlFxR0dEM1FTK1B2Z0VBMVFJdVpGdUlzQk5MUEROSXk1ZUx1SWFVQi9vdVBBK0ZXbVFjbzgxSmhSZ3JPUUI0cFFNc1k1Z2FHeGk2ZUVmaGRPNUp4T0E0cEx2Yy9JanZVQTdRdG84WkE9PQ`;
 
 function runDelayedFunctions ()
 {
