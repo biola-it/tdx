@@ -261,13 +261,12 @@ div.DetailAction {
 
 /* Default content block for the Knowledgebase */
 .kb-block {
-	display: block;
-	border: 1px solid #ddd;
 	background-color: #f5f5f5;
-	padding: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
 	border-radius: 6px;
+	border: 1px solid #ddd;
+	display: block;
+	margin: 10px 0;
+	padding: 10px 20px;
 }
 
 /* Override Foundation's odd decision to decrease the font-size of labels */
