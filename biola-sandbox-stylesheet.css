@@ -259,6 +259,17 @@ div.DetailAction {
   font-size: 18px;
 }
 
+/* Default content block for the Knowledgebase */
+.kb-block {
+	display: block;
+	border: 1px solid #ddd;
+	background-color: #f5f5f5;
+	padding: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 6px;
+}
+
 /* Override Foundation's odd decision to decrease the font-size of labels */
 label {
   font-size: 1em;
@@ -462,7 +473,6 @@ div.rss-headline {
 #32772 {
   margin: 2em;
 }
-
 
 /** Media queries for responsive elements **/
 
