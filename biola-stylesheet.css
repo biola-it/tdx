@@ -1,4 +1,4 @@
-/** Stylesheet version 24.8.13 **/
+/** Stylesheet version 25.05.30 **/
 
 /* Define CSS variables for global styles */
 :root {
@@ -111,6 +111,11 @@
   font-weight: var(--h3-font-weight);
 }
 
+/** Set the minimum width of the body, to prevent everything looking ridiculous **/
+body {
+  min-width: 380px;
+}
+
 .buwidget-container {
 }
 
@@ -214,10 +219,11 @@
     float: right;
   }
 }
-/**
-.navbar-header {
-  min-width: 375px;
+/** Remove the width setting on the "IT Client Portal" link, so that everything will fit in small screen **/
+.truncate-be {
+  width: auto;
 }
+
 /** ⇑ Overwrite TDX's .navbar-header styling ⇑ **/
 
 .header-btn-container {
@@ -237,13 +243,13 @@
 /* hides any TDx modules that contain a ".hide-module-container" element */
 .desktop-module:has(.hide-module-container)
 {
-  display: none;
-  margin: 0;
+	display: none;
+	margin: 0;
 }
 
 /* This makes the action button text not bold */
 .DetailAction {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 /* This needs to be here becauase it doesn't work just using [.DetailAction], don't change it back Adam */
@@ -253,44 +259,54 @@ div.DetailAction {
   font-size: 18px;
 }
 
+/* Default content block for the Knowledgebase */
+.kb-block {
+	background-color: #f5f5f5;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	display: block;
+	margin: 20px 0;
+	padding: 10px 20px;
+}
+
 /* Override Foundation's odd decision to decrease the font-size of labels */
 label {
-  font-size: 1em;
+	font-size: 1em;
 }
 
 .landing-page-header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
 }
 
 .landing-page-header>div {
-  margin: 0 1em;
-  padding-bottom: 1em;
-  text-align: center;
+	margin: 0 1em;
+	padding-bottom: 1em;
+	text-align: center;
 }
 
 .landing-page-header-container {
-  align-items: center;
-  display: flex;
-  flex-flow: column;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 2em 0;
+	align-items: center;
+	display: flex;
+	flex-flow: column;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 2em 0;
 }
 
 .landing-page-header-text-container>h1,
 .landing-page-header-text-container>h2 {
-  border-bottom: none;
-  margin: 0;
-  padding: 0;
+	border-bottom: none;
+	margin: 0;
+	padding: 0;
 }
 
 .landing-page-header-text-container>h1 {
-  font-family: arial;
-  font-size: 50px;
-  font-weight: 100;
-  letter-spacing: 2px;
-  line-height: 1;
+	font-family: arial;
+	font-size: 50px;
+	font-weight: 100;
+	letter-spacing: 2px;
+	line-height: 1;
 }
 
 .landing-page-header-text-container>h2 {
@@ -456,7 +472,6 @@ div.rss-headline {
 #32772 {
   margin: 2em;
 }
-
 
 /** Media queries for responsive elements **/
 
