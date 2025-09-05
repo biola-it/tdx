@@ -9,7 +9,7 @@ We have created two stylesheets for customizing element styling:
 
 ## Using these JavaScript files
 To add these files to TeamDynamix, use the GitHub Pages urls for the files. These URLs start with https://biola-it.github.io/TDX/, with the name of the file appended. You can copy/paste the following code into TDx:
-`<script src="https://biola-id.github.io/TDX/biola-scripts.js"></script>`
+`<script src="https://biola-it.github.io/TDX/biola-scripts.js"></script>`
 
 ### Search Bar styling
 A request was made to make the in-page TDx search bar "more shiny". As a result, the `fixSearchBars()` function was added to the javascript file, which does things like make the search bars full-width, adds a highlight/frame around them, etc.
