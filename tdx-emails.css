@@ -1,0 +1,98 @@
+  #biola-logo-wrapper {
+    text-align: center;
+    padding: 0 10px;
+    width: 500px;
+    height: calc(100% - 40px);
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  #biola-logo-wrapper > img {
+    height: 50px; object-fit: contain; margin: 15px;
+    
+  }
+
+  .tdx-button {
+    background-color: #2268AB;
+    border-radius: 9px;
+    color: white !important;
+    display: inline-block;
+    font-size: 24px;
+    margin: auto;
+    padding: 15px 30px;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .tdx-email-body {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-flow: column;
+    font-family: Arial, sans-serif;
+    margin: auto;
+    max-width: 700px;
+    min-width: 400px;
+    row-gap: 1em;
+    width: 100%;
+  }
+  .tdx-email-body * {
+    box-sizing: border-box;
+  }
+  .tdx-email-body a {
+    color: #2268AB;
+  }
+  .tdx-email-body hr {
+    margin: 4px 0;
+  }
+  
+  .tdx-email-footer {
+    background-color: #1D273B; 
+    color: white; 
+    font-size: 12px; 
+    padding: 10px; 
+    text-align: center;  
+    overflow: hidden;
+  }
+
+  .tdx-email-section {
+    border: 1px solid #2F4F6F;
+    border-radius: 13px;
+    margin: 3px 1em;
+  }
+  .tdx-email-section > * {
+    padding: 8px 25px;
+  }
+  .tdx-email-section > h2 {
+    background-color: #2F4F6F;
+    border-radius: 12px 12px 0 0;
+    color: white;
+    font-weight: 400;
+    margin: 0;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .ticket-attributes {
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: max-content auto;
+    row-gap: 8px;
+  }
+  .ticket-attributes > h4,
+  .ticket-attributes > p {
+    color: black;
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ticket-info-panels > div,
+  .ticket-info-panels > p {
+    margin-bottom: 4px;
+    margin-top: 0;
+  }
+  .ticket-info-panels > h4 {
+    color: black;
+    margin-bottom: 0;
+    margin-top: 4px;
+  }
