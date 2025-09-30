@@ -1,5 +1,5 @@
-var publicHelpFormLink = `https://services.biola.edu/TDClient/75/Portal/Requests/TicketRequests/NewForm?ID=GyNVwIAQfFw_&RequestorType=ServiceOffering`;
-var ssoHelpFormLink = `https://us1.teamdynamix.com/tdapp/app/form/start?c=NWE3NDc4OGMtNGQ5ZC00YTczLWFkNjUtOGNhYzk1YWRkNmMw&t=VXVwZ1RBPT03dzg1NWR2NlNvTDMwdmRpTG5HQ3d1VUxBQnF0Z0VIUjNmdmN1NU5EaEcvMmdla0NmS2dkblErb3FmeU5Za3dtblJWSEZmYXFCSytPeXBOa1JDMS9SWmc2WEZ1bFp0cEovRytmRW5kSFVpSTk2NXFFNDRYZkF2SjN1eFhmaUN1SUJNUFhzc0h1ZWJiSWNpbW9UdE5HOGc9PQ`;
+var publicHelpFormLink = `https://my.biola.edu/go/it/sign-in-help-form`;
+var ssoHelpFormLink = `https://my.biola.edu/go/it/request-help-form`;
 
 function runDelayedFunctions ()
 {
