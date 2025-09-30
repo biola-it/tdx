@@ -75,7 +75,7 @@ function buildSsoGHB ()
     
   var buttonText = `Request help`;
   var button = `<button class="btn btn-light">
-    <a href="${buttonLink}&backlink=${backlinkUrl}">
+    <a href="${buttonLink}">
     	${buttonText}
     </a>
   </button>`;
