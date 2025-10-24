@@ -113,7 +113,11 @@
 
 /** Set the minimum width of the body, to prevent everything looking ridiculous **/
 body {
-  min-width: 380px;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
+	min-width: 380px;
+	min-height: 100vh;
 }
 
 .buwidget-container {
