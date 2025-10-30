@@ -500,10 +500,11 @@ div.rss-headline {
       grid-template-columns: calc(50% - 1em) calc(50% - 1em);
   }
 }
-/** ⇓ Limit Popular Services module (#86131) to top 5 rows — attribute selector ⇓ **/
-div[id="86131"] .ModuleContent > *:nth-child(n+6) {
-  display: none !important; /* ensure it overrides other rules */
+/** ⇓ Limit Popular Services module (#86131) to top 5 rows (counts only div rows) ⇓ **/
+div[id="86131"] .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+  display: none !important; /* hide 6th div and onward */
 }
 /** ⇑ Limit Popular Services module to top 5 rows ⇑ **/
+
 
 
