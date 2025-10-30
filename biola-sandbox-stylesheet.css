@@ -520,7 +520,7 @@ div.rss-headline {
 }
 
 /* Limit Popular Articles to top 5 rows */
-#86134 .ModuleContent #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+#ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
     display: none !important;
 }
 
