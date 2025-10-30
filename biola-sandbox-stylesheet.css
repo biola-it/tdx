@@ -500,37 +500,37 @@ div.rss-headline {
       grid-template-columns: calc(50% - 1em) calc(50% - 1em);
   }
 }
-/** ⇓ Popular Services & Articles — limit to top 5 rows + heading style ⇓ **/
-/* Popular Services */
-#86131 {
-  /* optional container styles */
+/** ⇓ Popular Services & Popular Articles module enhancements ⇓ **/
+
+/* Popular Services — module 86131 */
+div[id="86131"] {
+  /* optional container adjustments */
 }
-#86131 .panel-heading {
-  background-color: rgb(217, 237, 247) !important; /* light blue */
+div[id="86131"] .panel-heading {
+  background-color: rgb(217, 237, 247) !important; /* light blue header */
 }
-#86131 .panel-heading h3 {
+div[id="86131"] .panel-heading h3.panel-title {
   font-weight: bold !important;
 }
-#86131 .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
-  display: none !important;
+div[id="86131"] .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+  display: none !important; /* hide everything after top 5 rows */
 }
 
-/* Popular Articles */
-#86134 {
-  /* optional container styles */
+/* Popular Articles — module 86134 */
+div[id="86134"] {
+  /* optional container adjustments */
 }
-#86134 .panel-heading {
-  background-color: rgb(217, 237, 247) !important; /* light blue */
+div[id="86134"] .panel-heading {
+  background-color: rgb(217, 237, 247) !important; /* light blue header */
 }
-#86134 .panel-heading h3 {
+div[id="86134"] .panel-heading h3.panel-title {
   font-weight: bold !important;
 }
-#86134 .ModuleContent #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
-  display: none !important;
+div[id="86134"] .ModuleContent #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+  display: none !important; /* hide everything after top 5 rows */
 }
-/** ⇑ end Popular Services & Articles module styling ⇑ **/
 
-}
+/** ⇑ End Popular Services & Popular Articles module enhancements ⇑ **/
 
 
 
