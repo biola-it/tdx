@@ -502,8 +502,8 @@ div.rss-headline {
 }
 /** ⇓ Limit Popular Services and Articles modules to top 5 rows ⇓ **/
 div[id="86131"] .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6),
-div[id="86134"] .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
-  display: none !important;
+div[id="86134"] > .ModuleContent > #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {  
+	display: none !important;
 }
 /** ⇑ Limit Popular Services and Articles modules ⇑ **/
 
