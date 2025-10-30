@@ -506,6 +506,12 @@ div[id="86134"] > .ModuleContent > #ctl00_divContent > div.padding.border-bottom
 	display: none !important;
 }
 /** ⇑ Limit Popular Services and Articles modules ⇑ **/
+/** ⇓ Limit Popular Articles module (#86134) to top 5 rows — more specific ⇓ **/
+div[id="86134"] > .ModuleContent > #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+  display: none !important;
+}
+/** ⇑ Limit Popular Articles module to top 5 rows ⇑ **/
+
 
 
 
