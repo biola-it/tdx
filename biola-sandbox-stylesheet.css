@@ -506,17 +506,6 @@ div[id="86134"] .ModuleContent #ctl00_divContent > div.padding.border-bottom.fon
   display: none !important;
 }
 /** ⇑ Limit Popular Services and Articles modules ⇑ **/
-/** ⇓ FORCE hide Popular Articles (#86134) rows 6+ — paste this at very end of CSS file ⇓ **/
-/* target the module element, classes, ModuleContent wrapper and inner content wrapper */
-div[id="86134"].desktop-module.panel.panel-default > .ModuleContent > #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-/** ⇑ end FORCE hide rule ⇑ **/
 
 
 
