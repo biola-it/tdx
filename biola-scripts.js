@@ -9,10 +9,10 @@ function runDelayedFunctions ()
 
 function runSandboxFunctions ()
 {
-    addStatusMenuItem ();
     appendStylesheet ("biola-sandbox-stylesheet.css");
     loadFontAwesome6 ();
     setSearchbarPlaceholder ();
+    addStatusMenuItem ();
     window.setTimeout (loadGetHelpButton, 2000);
     //    This is just for visual confirmation of which version of the script is loading.
     console.log ("biola-scripts.js sb version 2025.03.07");
@@ -35,10 +35,18 @@ function runProductionFunctions ()
 function addStatusMenuItem () {
     // Wait until the nav is loaded in the DOM
     const nav = document.getElementById('ctl00_mainNav');
-    if (!nav) return; // Exit if nav not found
+    if (!nav)
+    {
+        console.log (`dt100_mainNav element not found.`);
+        return;
+    }
 
     const navContainer = nav.querySelector('#navContainer .navbar-nav');
-    if (!navContainer) return; // Exit if the inner nav list isn't found
+    if (!navContainer)
+    {
+        console.log (`navbar-nav element not found.`);
+        return;
+    }
 
     // Create a new <li> element with the same classes as other nav items
     const newNavItem = document.createElement('li');
