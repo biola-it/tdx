@@ -9,6 +9,7 @@ function runDelayedFunctions ()
 
 function runSandboxFunctions ()
 {
+    addStatusMenuItem ();
     appendStylesheet ("biola-sandbox-stylesheet.css");
     loadFontAwesome6 ();
     setSearchbarPlaceholder ();
@@ -25,6 +26,33 @@ function runProductionFunctions ()
     window.setTimeout (loadGetHelpButton, 2000);
     //    This is just for visual confirmation of which version of the script is loading.
     console.log ("biola-scripts.js prod version 2025.03.26");
+}
+
+/**
+* Added a link to Status.biola.edu in the main menu
+**/
+function addStatusMenuItem () {
+    // Wait until the nav is loaded in the DOM
+    const nav = document.getElementById('ctl00_mainNav');
+    if (!nav) return; // Exit if nav not found
+
+    const navContainer = nav.querySelector('#navContainer > .navbar-nav');
+    if (!navContainer) return; // Exit if the inner nav list isn't found
+
+    // Create a new <li> element with the same classes as other nav items
+    const newNavItem = document.createElement('li');
+    newNavItem.className = 'nav-item'; // Adjust to match existing classes if needed
+
+    // Create the <a> link element
+    const link = document.createElement('a');
+    link.className = 'nav-link'; // Match existing nav link styles
+    link.href = 'https://status.biola.edu/';
+    link.target = '_blank'; // optional: open in new tab
+    link.textContent = 'Biola IT Status';
+
+    // Append the link to the <li>, then append <li> to the nav
+    newNavItem.appendChild(link);
+    navContainer.appendChild(newNavItem);
 }
 
 /**
