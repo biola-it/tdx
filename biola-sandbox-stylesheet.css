@@ -500,37 +500,28 @@ div.rss-headline {
       grid-template-columns: calc(50% - 1em) calc(50% - 1em);
   }
 }
-/** ⇓ Popular Services & Popular Articles module enhancements ⇓ **/
+/** ⇓ Popular Services & Popular Articles module enhancements — guaranteed to apply ⇓ **/
 
-/* Popular Services — module 86131 */
-div[id="86131"] {
-  /* optional container adjustments */
-}
-div[id="86131"] .panel-heading {
-  background-color: rgb(217, 237, 247) !important; /* light blue header */
-}
-div[id="86131"] .panel-heading h3.panel-title {
-  font-weight: bold !important;
-}
-div[id="86131"] .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
-  display: none !important; /* hide everything after top 5 rows */
+/* Apply to both modules using a grouped selector */
+#86131 .panel-heading,
+#86134 .panel-heading {
+    background-color: rgb(217, 237, 247) !important; /* light blue */
 }
 
-/* Popular Articles — module 86134 */
-div[id="86134"] {
-  /* optional container adjustments */
-}
-div[id="86134"] .panel-heading {
-  background-color: rgb(217, 237, 247) !important; /* light blue header */
-}
-div[id="86134"] .panel-heading h3.panel-title {
-  font-weight: bold !important;
-}
-div[id="86134"] .ModuleContent #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
-  display: none !important; /* hide everything after top 5 rows */
+/* Make headers bold */
+#86131 .panel-heading h3.panel-title,
+#86134 .panel-heading h3.panel-title {
+    font-weight: 700 !important; /* bold */
 }
 
-/** ⇑ End Popular Services & Popular Articles module enhancements ⇑ **/
+/* Limit Popular Services to top 5 rows */
+#86131 .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+    display: none !important;
+}
 
+/* Limit Popular Articles to top 5 rows */
+#86134 .ModuleContent #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+    display: none !important;
+}
 
 
