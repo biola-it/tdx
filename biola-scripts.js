@@ -29,50 +29,197 @@ function runProductionFunctions ()
 }
 
 /**
- * Inserts a "Biola IT Status" nav item into the top navbar.
- * Automatically retries if the navbar isn't loaded yet.
+ * Robust addStatusMenuItem:
+ * - Waits for nav to exist and settle (debounced observer)
+ * - Inserts exactly once (idempotent)
+ * - Removes duplicate anchors that point to the same URL
+ * - Inserts before Projects (id #divTDProjects) when available
  */
-function addStatusMenuItem() {
-  const url = 'https://status.biola.edu/';
-  const label = 'Biola IT Status';
+function addStatusMenuItem(options) {
+  options = options || {};
+  const url = options.url || 'https://status.biola.edu/';
+  const label = options.label || 'Biola IT Status';
+  const newTab = ('newTab' in options) ? !!options.newTab : true;
+  const parentSelectors = ['#navContainer ul', '#ctl00_mainNav ul', '.navbar-nav'];
+  const insertBeforeId = 'divTDProjects';
+  const STABLE_MS = 350;      // how long DOM must be idle before inserting
+  const OBS_TIMEOUT_MS = 10000; // stop observing after this many ms
 
-  // Try to find the nav container and <ul> that holds the nav items
-  const parent =
-    document.querySelector('#navContainer ul') ||
-    document.querySelector('#ctl00_mainNav ul') ||
-    document.querySelector('.navbar-nav');
-
-  if (!parent) {
-    // Retry in case the nav hasn’t rendered yet
-    console.warn('addStatusMenuItem: nav not found yet, retrying...');
-    setTimeout(addStatusMenuItem, 500);
+  // guard to prevent multiple insertions across runs
+  if (window.__biola_status_injected) {
+    // console.log('addStatusMenuItem: already injected previously — skipping');
     return;
   }
 
-  // Prevent duplicates
-  const exists = Array.from(parent.querySelectorAll('a')).some(a =>
-    (a.textContent || '').trim() === label
-  );
-  if (exists) {
-    console.log('addStatusMenuItem: already exists, skipping.');
+  function normalizeHref(h) {
+    try { return (new URL(h, location.href)).href.replace(/\/$/, ''); }
+    catch (e) { return ('' + h).replace(/\/$/, ''); }
+  }
+  const normalizedTargetHref = normalizeHref(url);
+
+  function findParent() {
+    for (const sel of parentSelectors) {
+      const p = document.querySelector(sel);
+      if (p) return p;
+    }
+    return null;
+  }
+
+  // Remove duplicate anchors pointing to the same URL, keep first
+  function dedupeExisting(parent) {
+    const anchors = Array.from(parent.querySelectorAll('a'));
+    const matching = anchors.filter(a => normalizeHref(a.href) === normalizedTargetHref);
+    if (matching.length > 1) {
+      matching.slice(1).forEach(a => {
+        const li = a.closest('li');
+        if (li && li.dataset && li.dataset.biolaInjected === 'true') {
+          // remove clones of our item first
+          li.remove();
+          console.log('addStatusMenuItem: removed duplicate injected li');
+        } else if (li) {
+          // if another script created it, remove duplicates but keep the first one seen
+          li.remove();
+          console.log('addStatusMenuItem: removed duplicate existing li for', a.href);
+        } else {
+          a.remove();
+          console.log('addStatusMenuItem: removed duplicate existing anchor for', a.href);
+        }
+      });
+    }
+  }
+
+  function alreadyExists(parent) {
+    // exists if an anchor with identical normalized href or same text exists
+    return Array.from(parent.querySelectorAll('a')).some(a =>
+      normalizeHref(a.href) === normalizedTargetHref || (a.textContent || '').trim() === label
+    );
+  }
+
+  function createItem(parent) {
+    // Try to clone a representative li to match classes/structure
+    const sampleLi = parent.querySelector('li.themed') || parent.querySelector('li');
+    if (sampleLi) {
+      const clone = sampleLi.cloneNode(true);
+      // Remove IDs to avoid duplicate IDs on page
+      clone.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+      // Ensure a proper anchor
+      let anchor = clone.querySelector('a');
+      if (!anchor) {
+        anchor = document.createElement('a');
+        clone.appendChild(anchor);
+      }
+      anchor.href = url;
+      anchor.textContent = label;
+      anchor.setAttribute('role', 'menuitem');
+      anchor.setAttribute('aria-label', label);
+      if (newTab) anchor.target = '_blank';
+      else anchor.removeAttribute('target');
+
+      // mark it so we can detect our own injection later
+      clone.dataset.biolaInjected = 'true';
+      return clone;
+    }
+
+    // fallback simple li/a with expected classes
+    const li = document.createElement('li');
+    li.className = 'themed tdbar-button-anchored';
+    const a = document.createElement('a');
+    a.href = url;
+    a.textContent = label;
+    a.setAttribute('role', 'menuitem');
+    a.setAttribute('aria-label', label);
+    if (newTab) a.target = '_blank';
+    li.appendChild(a);
+    li.dataset.biolaInjected = 'true';
+    return li;
+  }
+
+  function insertOnce(parent) {
+    // If exists, dedupe and exit
+    if (alreadyExists(parent)) {
+      console.log('addStatusMenuItem: item already exists, deduping if needed.');
+      dedupeExisting(parent);
+      // mark injected even if pre-existing so we don't try again
+      window.__biola_status_injected = true;
+      return true;
+    }
+
+    const newLi = createItem(parent);
+
+    // Try to insert before Projects if available, otherwise append
+    const beforeEl = parent.querySelector('#' + insertBeforeId);
+    if (beforeEl) {
+      parent.insertBefore(newLi, beforeEl);
+      console.log('addStatusMenuItem: inserted before #' + insertBeforeId);
+    } else {
+      parent.appendChild(newLi);
+      console.log('addStatusMenuItem: appended to end of nav');
+    }
+
+    // cleanup any duplicates that might exist
+    dedupeExisting(parent);
+
+    // final guard
+    window.__biola_status_injected = true;
+    return true;
+  }
+
+  // If parent exists now, attempt immediate insertion
+  const nowParent = findParent();
+  if (nowParent) {
+    insertOnce(nowParent);
     return;
   }
 
-  // Create the new nav <li> and <a>
-  const li = document.createElement('li');
-  li.className = 'themed tdbar-button-anchored';
+  // Otherwise observe the DOM until parent appears and is stable
+  let stabilityTimer = null;
+  let observer = null;
+  let timedOut = false;
 
-  const a = document.createElement('a');
-  a.href = url;
-  a.textContent = label;
-  a.target = '_blank'; // open in new tab; remove if not desired
-  a.setAttribute('role', 'menuitem');
-  a.setAttribute('aria-label', label);
+  function startObserving() {
+    if (observer) return;
+    observer = new MutationObserver((mutations) => {
+      const p = findParent();
+      if (!p) return; // keep waiting for nav to appear
+      // reset stability timer when mutations occur
+      if (stabilityTimer) clearTimeout(stabilityTimer);
+      stabilityTimer = setTimeout(() => {
+        try {
+          if (!window.__biola_status_injected) insertOnce(p);
+        } catch (e) { console.warn('addStatusMenuItem: insert failed', e); }
+        try { observer.disconnect(); } catch (e) {}
+      }, STABLE_MS);
+    });
 
-  li.appendChild(a);
-  parent.appendChild(li);
+    try {
+      observer.observe(document.documentElement || document.body, { childList: true, subtree: true });
+      // safety timeout — stop observing after OBS_TIMEOUT_MS
+      setTimeout(() => {
+        timedOut = true;
+        try { if (observer) observer.disconnect(); } catch (e) {}
+        const p = findParent();
+        if (p && !window.__biola_status_injected) {
+          // last-ditch attempt
+          try { insertOnce(p); } catch(e){ console.warn('addStatusMenuItem: final insert failed', e); }
+        }
+      }, OBS_TIMEOUT_MS);
+    } catch (err) {
+      // If MutationObserver fails for some reason, fallback to simple polling
+      console.warn('addStatusMenuItem: MutationObserver failed, falling back to polling', err);
+      let attempts = 0;
+      const poll = setInterval(() => {
+        attempts++;
+        const p = findParent();
+        if (p) {
+          clearInterval(poll);
+          try { insertOnce(p); } catch(e){ console.warn('addStatusMenuItem: poll insert failed', e); }
+        }
+        if (attempts > 50) clearInterval(poll);
+      }, 200);
+    }
+  }
 
-  console.log('addStatusMenuItem: added successfully.');
+  startObserving();
 }
 
 /**
