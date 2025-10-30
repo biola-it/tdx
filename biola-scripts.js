@@ -29,30 +29,50 @@ function runProductionFunctions ()
 }
 
 /**
-* Added a link to Status.biola.edu in the main menu
-**/
-function addStatusMenuItem () {
-    // Wait until the nav is loaded in the DOM
-    const nav = document.getElementById('ctl00_mainNav');
-    if (!nav) return; // Exit if nav not found
+ * Inserts a "Biola IT Status" nav item into the top navbar.
+ * Automatically retries if the navbar isn't loaded yet.
+ */
+function addStatusMenuItem() {
+  const url = 'https://status.biola.edu/';
+  const label = 'Biola IT Status';
 
-    const navContainer = nav.querySelector('#navContainer > .navbar-nav');
-    if (!navContainer) return; // Exit if the inner nav list isn't found
+  // Try to find the nav container and <ul> that holds the nav items
+  const parent =
+    document.querySelector('#navContainer ul') ||
+    document.querySelector('#ctl00_mainNav ul') ||
+    document.querySelector('.navbar-nav');
 
-    // Create a new <li> element with the same classes as other nav items
-    const newNavItem = document.createElement('li');
-    newNavItem.className = 'nav-item'; // Adjust to match existing classes if needed
+  if (!parent) {
+    // Retry in case the nav hasn’t rendered yet
+    console.warn('addStatusMenuItem: nav not found yet, retrying...');
+    setTimeout(addStatusMenuItem, 500);
+    return;
+  }
 
-    // Create the <a> link element
-    const link = document.createElement('a');
-    link.className = 'nav-link'; // Match existing nav link styles
-    link.href = 'https://status.biola.edu/';
-    link.target = '_blank'; // optional: open in new tab
-    link.textContent = 'Biola IT Status';
+  // Prevent duplicates
+  const exists = Array.from(parent.querySelectorAll('a')).some(a =>
+    (a.textContent || '').trim() === label
+  );
+  if (exists) {
+    console.log('addStatusMenuItem: already exists, skipping.');
+    return;
+  }
 
-    // Append the link to the <li>, then append <li> to the nav
-    newNavItem.appendChild(link);
-    navContainer.appendChild(newNavItem);
+  // Create the new nav <li> and <a>
+  const li = document.createElement('li');
+  li.className = 'themed tdbar-button-anchored';
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.textContent = label;
+  a.target = '_blank'; // open in new tab; remove if not desired
+  a.setAttribute('role', 'menuitem');
+  a.setAttribute('aria-label', label);
+
+  li.appendChild(a);
+  parent.appendChild(li);
+
+  console.log('addStatusMenuItem: added successfully.');
 }
 
 /**
