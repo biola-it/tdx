@@ -500,11 +500,13 @@ div.rss-headline {
       grid-template-columns: calc(50% - 1em) calc(50% - 1em);
   }
 }
-/** ⇓ Limit Popular Services module (#86131) to top 5 rows (counts only div rows) ⇓ **/
-div[id="86131"] .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
-  display: none !important; /* hide 6th div and onward */
+/** ⇓ Limit Popular Services and Articles modules to top 5 rows ⇓ **/
+div[id="86131"] .ModuleContent > div.padding.border-bottom.font-md:nth-of-type(n+6),
+div[id="86134"] .ModuleContent #ctl00_divContent > div.padding.border-bottom.font-md:nth-of-type(n+6) {
+  display: none !important;
 }
-/** ⇑ Limit Popular Services module to top 5 rows ⇑ **/
+/** ⇑ Limit Popular Services and Articles modules ⇑ **/
+
 
 
 
