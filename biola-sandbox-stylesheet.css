@@ -507,7 +507,16 @@ div[id="86134"] .ModuleContent #ctl00_divContent > div.padding.border-bottom.fon
 }
 /** ⇑ Limit Popular Services and Articles modules ⇑ **/
 
+/* Popular Services & Popular Articles Module Header Styles */
+div[id="86131"] .panel-heading,
+div[id="86134"] .panel-heading {
+    background-color: rgb(217, 237, 247); /* light blue background */
+}
 
+div[id="86131"] .panel-heading h3,
+div[id="86134"] .panel-heading h3 {
+    font-weight: bold; /* make header text bold */
+}
 
 
 
