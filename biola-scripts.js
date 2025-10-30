@@ -15,7 +15,7 @@ function runSandboxFunctions ()
     addStatusMenuItem ();
     window.setTimeout (loadGetHelpButton, 2000);
     //    This is just for visual confirmation of which version of the script is loading.
-    console.log ("biola-scripts.js sb version 2025.03.07");
+    console.log ("biola-scripts.js sb version 2025.10/30d");
 }
 
 function runProductionFunctions ()
