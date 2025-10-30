@@ -504,3 +504,6 @@ div.rss-headline {
 :is(div[id="86131"], div[id="86134"]) div:nth-child(n+6) {
   display: none;
 }
+:is(div[id="86131"], div[id="86134"]) div:nth-child(n+6)
+:is(div[id="86131"], div[id="86134"]) .panel-heading {
+}
