@@ -500,9 +500,10 @@ div.rss-headline {
       grid-template-columns: calc(50% - 1em) calc(50% - 1em);
   }
 }
-/** ⇓ Limit Popular Services module to top 5 rows ⇓ **/
-#86131 .ModuleContent > *:nth-child(n+6) {
-    display: none; /* hides everything after the 5th row */
+/** ⇓ Limit Popular Services module (#86131) to top 5 rows — attribute selector ⇓ **/
+div[id="86131"] .ModuleContent > *:nth-child(n+6) {
+  display: none !important; /* ensure it overrides other rules */
 }
 /** ⇑ Limit Popular Services module to top 5 rows ⇑ **/
+
 
