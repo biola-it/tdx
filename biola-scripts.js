@@ -67,41 +67,29 @@ function addMyTicketMenuItem () {
 
 /**
 * Adds a link to Status.biola.edu in the main menu
-* (Fixed to work on both Home and application pages)
+* (Fixed to work on Home, Services, KB, and Questions pages)
 **/
 function addStatusMenuItem () {
-    // Find the main navigation bar using a "ends-with" selector
-    // This will match BOTH "ctl00_mainNav" and "ctl00_ctl00_mainNav"
-    const nav = document.querySelector('nav[id$="_mainNav"]');
-    if (!nav)
+    // Find the menu list <ul> directly. This selector works on all pages.
+    const menuList = document.querySelector('#navContainer .navbar-nav');
+    if (!menuList)
     {
-        // Fixed the console log message to be more accurate
-        console.log (`addStatusMenuItem: 'nav[id$="_mainNav"]' element not found.`);
-        return;
-    }
-
-    // Find the <ul> list that holds the menu items
-    const navContainer = nav.querySelector('#navContainer .navbar-nav');
-    if (!navContainer)
-    {
-        console.log (`addStatusMenuItem: '.navbar-nav' element not found.`);
+        console.log (`addStatusMenuItem: '#navContainer .navbar-nav' element not found.`);
         return;
     }
 
     // Create a new <li> element
     const newNavItem = document.createElement('li');
-    // Use the same classes as other menu items for consistent styling
-    newNavItem.className = 'themed tdbar-button-anchored'; 
+    newNavItem.className = 'themed tdbar-button-anchored'; // Use consistent class
 
     // Create the <a> link element
     const link = document.createElement('a');
     link.href = 'https://status.biola.edu/';
-    link.target = '_blank'; // optional: open in new tab
+    link.target = '_blank';
     link.textContent = 'Biola IT Status';
 
-    // Append the link to the <li>, then append <li> to the nav
-    newNavItem.appendChild(link);
-    navContainer.appendChild(newNavItem);
+    // Append the <li> to the <ul>
+    menuList.appendChild(newNavItem);
 }
 
 /**
