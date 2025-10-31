@@ -67,38 +67,41 @@ function addMyTicketMenuItem () {
 
 /**
 * Adds a link to Status.biola.edu in the main menu
-* THIS WAS WRITTEN BY CHAT-GPT AND UPDATED/FIXED BY ADAM
+* (Fixed to work on both Home and application pages)
 **/
 function addStatusMenuItem () {
-    // Wait until the nav is loaded in the DOM
-    const nav = document.getElementById('ctl00_mainNav');
-    if (!nav)
-    {
-        console.log (`dt100_mainNav element not found.`);
-        return;
-    }
+    // Find the main navigation bar using a "ends-with" selector
+    // This will match BOTH "ctl00_mainNav" and "ctl00_ctl00_mainNav"
+    const nav = document.querySelector('nav[id$="_mainNav"]');
+    if (!nav)
+    {
+        // Fixed the console log message to be more accurate
+        console.log (`addStatusMenuItem: 'nav[id$="_mainNav"]' element not found.`);
+        return;
+    }
 
-    const navContainer = nav.querySelector('#navContainer .navbar-nav');
-    if (!navContainer)
-    {
-        console.log (`navbar-nav element not found.`);
-        return;
-    }
+    // Find the <ul> list that holds the menu items
+    const navContainer = nav.querySelector('#navContainer .navbar-nav');
+    if (!navContainer)
+    {
+        console.log (`addStatusMenuItem: '.navbar-nav' element not found.`);
+        return;
+    }
 
-    // Create a new <li> element with the same classes as other nav items
-    const newNavItem = document.createElement('li');
-    newNavItem.className = 'nav-item'; // Adjust to match existing classes if needed
+    // Create a new <li> element
+    const newNavItem = document.createElement('li');
+    // Use the same classes as other menu items for consistent styling
+    newNavItem.className = 'themed tdbar-button-anchored'; 
 
-    // Create the <a> link element
-    const link = document.createElement('a');
-    link.className = 'nav-link'; // Match existing nav link styles
-    link.href = 'https://status.biola.edu/';
-    link.target = '_blank'; // optional: open in new tab
-    link.textContent = 'Biola IT Status';
+    // Create the <a> link element
+    const link = document.createElement('a');
+    link.href = 'https://status.biola.edu/';
+    link.target = '_blank'; // optional: open in new tab
+    link.textContent = 'Biola IT Status';
 
-    // Append the link to the <li>, then append <li> to the nav
-    newNavItem.appendChild(link);
-    navContainer.appendChild(newNavItem);
+    // Append the link to the <li>, then append <li> to the nav
+    newNavItem.appendChild(link);
+    navContainer.appendChild(newNavItem);
 }
 
 /**
