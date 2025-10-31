@@ -12,6 +12,7 @@ function runSandboxFunctions ()
     appendStylesheet ("biola-sandbox-stylesheet.css");
     loadFontAwesome6 ();
     setSearchbarPlaceholder ();
+    window.setTimeout (addMyTicketMenuItem, 1000);
     window.setTimeout (addStatusMenuItem, 1000);
     window.setTimeout (loadGetHelpButton, 2000);
     //    This is just for visual confirmation of which version of the script is loading.
@@ -26,6 +27,44 @@ function runProductionFunctions ()
     window.setTimeout (loadGetHelpButton, 2000);
     //    This is just for visual confirmation of which version of the script is loading.
     console.log ("biola-scripts.js prod version 2025.03.26");
+}
+
+/**
+* Adds a link to "My Tickets" in the main menu.
+* NOTE: This function must be called after a delay to ensure the nav menu exists. Written by Gemini
+**/
+function addMyTicketMenuItem () {
+    // Find the main navigation bar
+    const nav = document.getElementById('ctl00_mainNav');
+    if (!nav)
+    {
+        // Note: I fixed the typo in the console log to match the ID
+        console.log (`addMyTicketMenuItem: 'ctl00_mainNav' element not found.`);
+        return;
+    }
+
+    // Find the <ul> list that holds the menu items
+    const navContainer = nav.querySelector('#navContainer .navbar-nav');
+    if (!navContainer)
+    {
+        console.log (`addMyTicketMenuItem: '.navbar-nav' element not found.`);
+        return;
+    }
+
+    // Create a new <li> element
+    const newNavItem = document.createElement('li');
+    // Use the same classes as other menu items for consistent styling
+    newNavItem.className = 'themed tdbar-button-anchored'; 
+
+    // Create the <a> link element
+    const link = document.createElement('a');
+    link.href = 'https://services.biola.edu/SBTDClient/75/Portal/Requests/TicketRequests/'; // <-- New URL
+    link.textContent = 'My Tickets'; // <-- New Text
+    // (We'll let it open in the same tab, so no target='_blank')
+
+    // Append the link to the <li>, then append <li> to the nav
+    newNavItem.appendChild(link);
+    navContainer.appendChild(newNavItem);
 }
 
 /**
