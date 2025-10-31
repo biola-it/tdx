@@ -31,19 +31,19 @@ function runProductionFunctions ()
 
 /**
 * Adds a link to "My Tickets" in the main menu.
-* NOTE: This function must be called after a delay to ensure the nav menu exists. Written by Gemini
+* This version is fixed to work on both Home and application pages.
 **/
 function addMyTicketMenuItem () {
-    // Find the main navigation bar
-    const nav = document.getElementById('ctl00_mainNav');
+    // Find the main navigation bar using a "ends-with" selector
+    // This will match BOTH "ctl00_mainNav" and "ctl00_ctl00_mainNav"
+    const nav = document.querySelector('nav[id$="_mainNav"]'); 
     if (!nav)
     {
-        // Note: I fixed the typo in the console log to match the ID
-        console.log (`addMyTicketMenuItem: 'ctl00_mainNav' element not found.`);
+        console.log (`addMyTicketMenuItem: 'nav[id$="_mainNav"]' element not found.`);
         return;
     }
 
-    // Find the <ul> list that holds the menu items
+    // Find the <ul> list that holds the menu items (this part is the same)
     const navContainer = nav.querySelector('#navContainer .navbar-nav');
     if (!navContainer)
     {
@@ -53,14 +53,12 @@ function addMyTicketMenuItem () {
 
     // Create a new <li> element
     const newNavItem = document.createElement('li');
-    // Use the same classes as other menu items for consistent styling
     newNavItem.className = 'themed tdbar-button-anchored'; 
 
     // Create the <a> link element
     const link = document.createElement('a');
-    link.href = 'https://services.biola.edu/SBTDClient/75/Portal/Requests/TicketRequests/'; // <-- New URL
-    link.textContent = 'My Tickets'; // <-- New Text
-    // (We'll let it open in the same tab, so no target='_blank')
+    link.href = 'https://services.biola.edu/SBTDClient/75/Portal/Requests/TicketRequests/';
+    link.textContent = 'My Tickets'; 
 
     // Append the link to the <li>, then append <li> to the nav
     newNavItem.appendChild(link);
