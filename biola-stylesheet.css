@@ -497,10 +497,10 @@ div.rss-headline {
   }
 }
 /** ⇓ Limit Popular Services and Articles modules to top 5 rows ⇓ **/
-:is(div[id="86131"], div[id="86134"]) div:nth-child(n+6) {
+:is(div[id="86066"], div[id="86134"]) div:nth-child(n+6) {
   display: none;
 }
-:is(div[id="86131"], div[id="86134"]) .panel-heading {
+:is(div[id="86067"], div[id="86134"]) .panel-heading {
 	background-color: #2268ab;
 	color: white;
 }
