@@ -24,6 +24,8 @@ function runProductionFunctions ()
     appendStylesheet ("biola-stylesheet.css");
     loadFontAwesome6 ();
     setSearchbarPlaceholder ();
+    window.setTimeout (addMyTicketMenuItem, 1000);
+    window.setTimeout (addStatusMenuItem, 1000);
     window.setTimeout (loadGetHelpButton, 2000);
     //    This is just for visual confirmation of which version of the script is loading.
     console.log ("biola-scripts.js prod version 2025.03.26");
