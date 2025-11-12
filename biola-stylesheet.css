@@ -496,3 +496,11 @@ div.rss-headline {
       grid-template-columns: calc(50% - 1em) calc(50% - 1em);
   }
 }
+/** ⇓ Limit Popular Services and Articles modules to top 5 rows ⇓ **/
+:is(div[id="86131"], div[id="86134"]) div:nth-child(n+6) {
+  display: none;
+}
+:is(div[id="86131"], div[id="86134"]) .panel-heading {
+	background-color: #2268ab;
+	color: white;
+}
