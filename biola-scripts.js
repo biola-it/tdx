@@ -59,7 +59,7 @@ function addMyTicketMenuItem () {
 
     // Create the <a> link element
     const link = document.createElement('a');
-    link.href = 'https://services.biola.edu/SBTDClient/75/Portal/Requests/TicketRequests/';
+    link.href = 'https://services.biola.edu/TDClient/75/Portal/Requests/TicketRequests/';
     link.textContent = 'My Tickets'; 
 
     // Append the link to the <li>, then append <li> to the nav
